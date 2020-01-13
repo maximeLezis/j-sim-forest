@@ -4,11 +4,16 @@ import java.util.Scanner;
 
 import javafx.application.Application;
 import javafx.stage.Stage;
+import model.GridModel;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
+import javafx.scene.layout.StackPane;
+import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Text;
@@ -31,20 +36,31 @@ public class Main extends Application {
 			root.setPadding(new Insets(15, 20, 10, 10));
 			
 			// LEFT
-			//Button btnLeft = new Button("Left");
-			Pane paneLeft = new Pane();
-			//btnLeft.setPadding(new Insets(5, 5, 5, 5));
-			paneLeft.setStyle("-fx-background-color: #000000");
-			//root.setLeft(btnLeft);
-			root.setLeft(paneLeft);
-			//BorderPane.setMargin(btnLeft, new Insets(10, 10, 10, 10));
-			BorderPane.setMargin(paneLeft, new Insets(10, 10, 10, 10));
+			Label simulationSettings = new Label("Paramètres de la simulation");
+			TextField numberOfRows = new TextField();
+			TextField numberOfColumns = new TextField();
+			Label etc = new Label("etc...");
+			VBox leftVBox = new VBox(5);
+			leftVBox.getChildren().addAll(simulationSettings, numberOfRows, numberOfColumns, etc);
+			leftVBox.setPadding(new Insets(5, 5, 5, 5));
+			leftVBox.setPrefWidth(200);
+			root.setLeft(leftVBox);
+			BorderPane.setMargin(leftVBox, new Insets(10, 10, 10, 10));
 			
-			// CENTER
-		    Button btnCenter = new Button("Center");
-		    btnCenter.setPadding(new Insets(5, 5, 5, 5));
-		    root.setCenter(btnCenter);
-		    BorderPane.setAlignment(btnCenter, Pos.BOTTOM_CENTER);
+			// CENTER			
+			GridPane centerGrid = new GridPane();
+			for(int col = 0; col < 25; col++) {
+				for(int row = 0; row < 25; row++) {
+					Rectangle rec = new Rectangle();
+					rec.setWidth(20);
+					rec.setHeight(20);
+					rec.setFill(Color.LIGHTGREY);
+					centerGrid.add(rec, col, row);
+				}
+			}
+			centerGrid.setStyle("-fx-grid-lines-visible: true");
+			root.setCenter(centerGrid);
+			BorderPane.setAlignment(centerGrid, Pos.CENTER);
 		    
 		    Scene scene = new Scene(root, 1200, 600);
 		    primaryStage.setTitle("BorderPane Layout Demo");

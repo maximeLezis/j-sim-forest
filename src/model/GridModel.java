@@ -1,37 +1,27 @@
 package model;
 
-public class GridModel {
+import javafx.scene.layout.GridPane;
+import javafx.scene.paint.Color;
+
+public class GridModel extends GridPane {
 	
 	private int width;
 	private int height;
 	private CellModel[][] cells;
 	
-	/**
-	 * @return the width
-	 */
-	public int getWidth() {
-		return width;
-	}
-	
-	/**
-	 * @param width the width to set
-	 */
-	public void setWidth(int width) {
+	public GridModel(int width, int height) {
 		this.width = width;
-	}
-
-	/**
-	 * @return the height
-	 */
-	public int getHeight() {
-		return height;
-	}
-
-	/**
-	 * @param height the height to set
-	 */
-	public void setHeight(int height) {
 		this.height = height;
+		this.cells = new CellModel[width][height];
+		
+		for(int i = 0; i < width; i++) {
+			for(int j = 0; j < height; j++) {
+				cells[i][j] = new CellModel();
+				cells[i][j].setWidth(10);
+				cells[i][j].setHeight(10);
+				cells[i][j].setFill(Color.AQUA); // test
+			}
+		}
 	}
 
 	/**
